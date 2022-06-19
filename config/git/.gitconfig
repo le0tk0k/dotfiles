@@ -18,7 +18,7 @@
 	br = branch
 	df = diff
 	s = switch
-	g = log --pretty='format:%C(yellow)%h %C(white)%s %C(red)%d %C(green)<%as,%an>'
+	g = log --pretty='format:%C(yellow)%h %C(white)%s %C(red)%d %C(green)<%as,%an>' --graph
 [pull]
 	ff = only
 	rebase = true
