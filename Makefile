@@ -4,5 +4,5 @@ color:
 
 .PHONY: link
 link:
-	ln -snfv ~/dotfiles/config/tmux/tmux.conf ~/.config/tmux/tmux.conf
-	ln -snfv ~/dotfiles/config/starship/starship.toml ~/.config/starship.toml
+	ln -snfv ${HOME}/dotfiles/config/tmux/tmux.conf ${HOME}/.config/tmux/tmux.conf
+	ln -snfv ${HOME}/dotfiles/config/starship/starship.toml ${HOME}/.config/starship.toml
