@@ -48,7 +48,7 @@ zinit light zsh-users/zsh-autosuggestions
 autoload -Uz compinit && compinit
 
 # history
-HISTFILE=$HOME/.zsh_history
+HISTFILE=$ZDOTDIR/.zsh_history
 HISTSIZE=10000
 SAVEHIST=100000
 setopt share_history
