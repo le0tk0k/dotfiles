@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -eu
+set -eux
 
 DOTFILES_DIR="${HOME}/dotfiles"
 CONFIG_DIR="${DOTFILES_DIR}/config"
