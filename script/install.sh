@@ -26,6 +26,7 @@ clone() {
   else
     print_info "Cloning dotfiles repository..."
     git clone https://github.com/le0tk0k/dotfiles.git "${DOTFILES_DIR}"
+    mkdir -p "${HOME}/.config/{gh,git,tmux,zsh}"
   fi
 }
 
