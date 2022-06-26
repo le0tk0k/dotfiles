@@ -1,8 +1,6 @@
 [user]
 	name = le0tk0k
 	email = 62293842+le0tk0k@users.noreply.github.com
-[core]
-	excludesfile = ~/.gitignore_global
 [color]
 	ui = auto
 [color "status"]
