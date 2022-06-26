@@ -41,6 +41,14 @@ install_homebrew() {
   fi
 }
 
+test_brew_bundle() {
+  if [[ $(whoami) = "runner" ]]; then
+    print_info "Restoring Homebrew packages..."
+    brew bundle install --file="${DOTFILES_DIR}/config/homebrew/Brewfile"
+    print_info "Done"
+  fi
+}
+
 install_zinit() {
   local ZINIT_HOME="${HOME}/.local/share/zinit/zinit.git"
   if [[ -d "${ZINIT_HOME}" ]]; then
@@ -70,5 +78,6 @@ link_dotfiles() {
 start_message
 clone
 install_homebrew
+test_brew_bundle
 install_zinit
 link_dotfiles
