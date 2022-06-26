@@ -1,0 +1,9 @@
+name: Test
+
+on: push
+
+jobs:
+  test:
+    runs-on: macOS-latest
+    steps:
+      - /bin/bash -c "$(curl -sL https://raw.githubusercontent.com/le0tk0k/dotfiles/main/script/install.sh)"
