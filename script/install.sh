@@ -2,6 +2,9 @@
 
 set -eu
 
+DOTFILES_DIR="${HOME}/dotfiles"
+CONFIG_DIR="${DOTFILES_DIR}/config"
+
 print_info() {
   printf "\e[36;1m[INFO] %s\e[m\n" "$*"
 }
@@ -17,6 +20,27 @@ start_message() {
   print_info '-----------------------------------'
 }
 
+clone() {
+  if [[ -d "${DOTFILES_DIR}" ]]; then
+    print_info "dotfiles repository already exists"
+  else
+    print_info "Cloning dotfiles repository..."
+    git clone https://github.com/le0tk0k/dotfiles.git "${DOTFILES_DIR}"
+  fi
+}
+
+install_homebrew() {
+  if [[ $(command -v brew) ]]; then
+    print_info "Homebrew is already installed"
+  else
+    print_info "Installing Homebrew..."
+    curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh
+    print_info "Done"
+    print_info "Restoring Homebrew packages..."
+    brew bundle install --file="${DOTFILES_DIR}/config/homebrew/Brewfile"
+  fi
+}
+
 install_zinit() {
   local ZINIT_HOME="${HOME}/.local/share/zinit/zinit.git"
   if [[ -d "${ZINIT_HOME}" ]]; then
@@ -29,17 +53,20 @@ install_zinit() {
 }
 
 link_dotfiles() {
-  # todo: set the variable DOTFILES_DIR.
-  ln -snfv "$HOME/dotfiles/config/tmux/tmux.conf" "$HOME/.config/tmux/tmux.conf"
-  ln -snfv "$HOME/dotfiles/config/starship/starship.toml" "$HOME/.config/starship.toml"
-  ln -snfv "$HOME/dotfiles/config/git/config" "$HOME/.config/git/config"
-  ln -snfv "$HOME/dotfiles/config/git/ignore" "$HOME/.config/git/ignore"
-  ln -snfv "$HOME/dotfiles/config/gh/config.yml" "$HOME/.config/gh/config.yml"
-  ln -snfv "$HOME/dotfiles/config/hammerspoon/init.lua" "$HOME/.hammerspoon/init.lua"
-  ln -snfv "$HOME/dotfiles/config/vim/.vimrc" "$HOME/.vimrc"
-  ln -snfv "$HOME/dotfiles/config/zsh/.zshenv" "$HOME/.zshenv"
-  ln -snfv "$HOME/dotfiles/config/zsh/.zshrc" "$HOME/.config/zsh/.zshrc"
+  print_info "Linking config files..."
+  ln -snfv "${CONFIG_DIR}/tmux/tmux.conf" "$HOME/.config/tmux/tmux.conf"
+  ln -snfv "${CONFIG_DIR}/starship/starship.toml" "$HOME/.config/starship.toml"
+  ln -snfv "${CONFIG_DIR}/git/config" "$HOME/.config/git/config"
+  ln -snfv "${CONFIG_DIR}/git/ignore" "$HOME/.config/git/ignore"
+  ln -snfv "${CONFIG_DIR}/gh/config.yml" "$HOME/.config/gh/config.yml"
+  ln -snfv "${CONFIG_DIR}/hammerspoon/init.lua" "$HOME/.hammerspoon/init.lua"
+  ln -snfv "${CONFIG_DIR}/vim/.vimrc" "$HOME/.vimrc"
+  ln -snfv "${CONFIG_DIR}/zsh/.zshenv" "$HOME/.zshenv"
+  ln -snfv "${CONFIG_DIR}/zsh/.zshrc" "$HOME/.config/zsh/.zshrc"
 }
 
 start_message
+clone
+install_homebrew
 install_zinit
+link_dotfiles
