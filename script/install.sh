@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -eu
+set -eux
 
 DOTFILES_DIR="${HOME}/dotfiles"
 CONFIG_DIR="${DOTFILES_DIR}/config"
@@ -55,6 +55,7 @@ install_zinit() {
 link_dotfiles() {
   print_info "Linking config files..."
   mkdir -p "${HOME}/.config/{gh,git,tmux,zsh}"
+  ls "${HOME}/.config"
   ln -snfv "${CONFIG_DIR}/tmux/tmux.conf" "$HOME/.config/tmux/tmux.conf"
   ln -snfv "${CONFIG_DIR}/starship/starship.toml" "$HOME/.config/starship.toml"
   ln -snfv "${CONFIG_DIR}/git/config" "$HOME/.config/git/config"
