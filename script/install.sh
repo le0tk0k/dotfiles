@@ -1,6 +1,6 @@
 #!/bin/bash
 
-set -eux
+set -eu
 
 DOTFILES_DIR="${HOME}/dotfiles"
 CONFIG_DIR="${DOTFILES_DIR}/config"
@@ -26,7 +26,6 @@ clone() {
   else
     print_info "Cloning dotfiles repository..."
     git clone https://github.com/le0tk0k/dotfiles.git "${DOTFILES_DIR}"
-    mkdir -p "${HOME}/.config/{gh,git,tmux,zsh}"
   fi
 }
 
@@ -55,6 +54,7 @@ install_zinit() {
 
 link_dotfiles() {
   print_info "Linking config files..."
+  mkdir -p "${HOME}/.config/{gh,git,tmux,zsh}"
   ln -snfv "${CONFIG_DIR}/tmux/tmux.conf" "$HOME/.config/tmux/tmux.conf"
   ln -snfv "${CONFIG_DIR}/starship/starship.toml" "$HOME/.config/starship.toml"
   ln -snfv "${CONFIG_DIR}/git/config" "$HOME/.config/git/config"
